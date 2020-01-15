@@ -1,0 +1,52 @@
+State_Long,State,Region,Division,Climate_Region
+Illinois,IL,Midwest,East North Central,Central
+Indiana,IN,Midwest,East North Central,Central
+Michigan,MI,Midwest,East North Central,Midwest
+Ohio,OH,Midwest,East North Central,Central
+Wisconsin,WI,Midwest,East North Central,Midwest
+Alabama,AL,South,East South Central,South East
+Kentucky,KY,South,East South Central,Central
+Mississippi,MS,South,East South Central,South
+Tennessee,TN,South,East South Central,Central
+New Jersey,NJ,Northeast,Middle Atlantic,Northeast
+New York,NY,Northeast,Middle Atlantic,Northeast
+Pennsylvania,PA,Northeast,Middle Atlantic,Northeast
+Arizona,AZ,West,Mountain,Southwest
+Colorado,CO,West,Mountain,Southwest
+Idaho,ID,West,Mountain,Northwest
+Montana,MT,West,Mountain,North Central
+New Mexico,NM,West,Mountain,Southwest
+Nevada,NV,West,Mountain,West
+Utah,UT,West,Mountain,Southwest
+Wyoming,WY,West,Mountain,North Central
+Connecticut,CT,Northeast,New England,Northeast
+Massachusetts,MA,Northeast,New England,Northeast
+Maine,ME,Northeast,New England,Northeast
+New Hampshire,NH,Northeast,New England,Northeast
+Rhode Island,RI,Northeast,New England,Northeast
+Vermont,VT,Northeast,New England,Northeast
+Alaska,AK,West,Pacific,Alaska
+California,CA,West,Pacific,West
+Hawaii,HI,West,Pacific,Hawaii
+Oregon,OR,West,Pacific,Northwest
+Washington,WA,West,Pacific,Northwest
+District of Columbia,DC,South,South Atlantic,Northeast
+Delaware,DE,South,South Atlantic,Northeast
+Florida,FL,South,South Atlantic,Southeast
+Georgia,GA,South,South Atlantic,Southeast
+Maryland,MD,South,South Atlantic,Northeast
+North Carolina,NC,South,South Atlantic,Southeast
+South Carolina,SC,South,South Atlantic,Southeast
+Virginia,VA,South,South Atlantic,Southeast
+West Virginia,WV,South,South Atlantic,Central
+Iowa,IA,Midwest,West North Central,Midwest
+Kansas,KS,Midwest,West North Central,South
+Minnesota,MN,Midwest,West North Central,Midwest
+Missouri,MO,Midwest,West North Central,Central
+North Dakota,ND,Midwest,West North Central,North Central
+Nebraska,NE,Midwest,West North Central,North Central
+South Dakota,SD,Midwest,West North Central,North Central
+Arkansas,AR,South,West South Central,South
+Louisiana,LA,South,West South Central,South
+Oklahoma,OK,South,West South Central,South
+Texas,TX,South,West South Central,South
