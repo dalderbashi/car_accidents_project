@@ -5,23 +5,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Leaflet Step-1</title>
+    <title>Traffic Accidents</title>
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
-    <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <script src="https://kit.fontawesome.com/8696f72c38.js" crossorigin="anonymous"></script>
+    <!-- Our CSS -->
 </head>
 
-<body>
-
+<body class="bg-white text-dark overflow-hidden">
+    <nav class="navbar fixed-top navbar-light bg-white bg-white top-nav section--top container-fluid border-bottom py-0">
+        <div class="d-flex align-items-center py-3 px-2 justify-content-between w-100">
+            <h4 class="site-title mb-0 font-weight-bold flex-grow-1 d-block">Traffic Accidents in the US</h4>
+            <a class="d-block" href="https://github.com/dalderbashi/car_accidents_project">Github</a>
+        </div>
+    </nav>
+    <section class="container-fluid h-100 overflow-hidden">
+        <div class="row h-100 overflow-hidden">
+            <aside class="side-nav col-2 d-flex flex-column pl-4 py-3 border-right h-100">
+                <a class="d-block my-2" href="#introduction">Introduction</a>
+                <a class="d-block my-2" href="#national-overview">National Overview</a>
+                <!-- <a class="d-block my-2" href="#accident-map">Accidents Map</a> -->
+                <a class="d-block my-2" href="#ml-models">Machine Learning Models</a>
+            </aside>
+            <main class="col-10 py-5 px-5 overflow-auto h-100">
+                <section id="introduction" class="section d-flex flex-column border-bottom mb-5 pb-3">
+                    <h1 class="page-title display-4 mb-5">
+                        Introduction
+                    </h1>
+                    <p>
+                        The goal of this project was to attempt prediction accidents severities. Severity predictions can be helpful in traffic management to divert traffic from the most severe accidents and improve response time to most severe accidents. The project explored
+                        the effect of several features on traffic accidents, generally, and severity, specifically, using a series of charts and machine learning.
+                    </p>
+                    <h3 class="mt-3 mb-2 text-uppercase">Data</h3>
+                    <p>
+                        The traffic accident dataset, sourced from Kaggle, includes data from 49 states between February 2016 to March 2019. Sources include US and state departments of transportation, law enforcement agencies, traffic cameras, and traffic sensors within the
+                        road-networks. In total, the dataset contains 2.25 million recorded accidents.
+                        <blockquote class="d-flex align-items-center display-4 bg-dark rounded py-3 shadow my-2 text-info font-weight-bold">
+                            <small><i class="fas fa-car-crash ml-5"></i></small><span class="text-center flex-grow-1 mr-5">2.25 million accidents</span>
+                        </blockquote>
+                    </p>
+                    <h3 class="mt-3 mb-2 text-uppercase">Utility</h3>
+                    <p>
+                        The output of this project could be useful for numerous applications like real-time accident prediction, hotspot analysis, or studying the impact of weather on accident occurrence.
+                    </p>
+                </section>
+                <section id="national-overview" class="section d-flex flex-column border-bottom mb-5 pb-3">
+                    <h1 class="mt-5 page-title display-4 mb-5 font-weight-light ">
+                        National Overview
+                    </h1>
+                    <p>
+                        <nav class="d-flex align-items-center">
+                            <h4 class="font-weight-bold">Accidents by:</h4>
+                            <h5 class="flex-grow-1 d-flex justify-content-center mr-5 accidents-by" data-for="Accidentsby">
+                                <div data-accident-category="County" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">County</div>
+                                <div data-accident-category="Street" class="mr-5 py-2 px-3 badge badge-pill bg-primary text-white shadow text-uppercase">Street</div>
+                                <div data-accident-category="State" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">State</div>
+                            </h5>
+                        </nav>
+                        <img class="mx-auto img-fluid p-3 m-3" id="AccidentsbyImage" src="images/AccidentsbyStreet.png" alt="Accidents by Street">
+                    </p>
+                    <hr class="mx-5 mb-3 mt-3">
+                    <p>
+                        <nav class="d-flex align-items-center">
+                            <h4 class="font-weight-bold">Accidents per:</h4>
+                            <h5 class="flex-grow-1 d-flex justify-content-center mr-5 accidents-per" data-for="accidentsPer">
+                                <div data-accident-category="Side" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">Street Side</div>
+                                <div data-accident-category="TimeOfDay" class="mr-5 py-2 px-3 badge badge-pill bg-primary text-white shadow text-uppercase">Time of Day</div>
+                                <div data-accident-category="WeatherCondition" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">Weather Condition</div>
+                            </h5>
+                        </nav>
+                        <img class="mx-auto img-fluid p-3 m-3" id="accidentsPerImage" src="images/accidentsPerTimeOfDay.png" alt="Accidents per Time Of Day">
+                    </p>
+                    <hr class="mx-5 mb-3 mt-3">
+                    <p>
+                        <nav class="d-flex align-items-center">
+                            <h4 class="font-weight-bold">Average:</h4>
+                            <h5 class="flex-grow-1 d-flex justify-content-center mr-5 accidents-per" data-for="avg">
+                                <div data-accident-category="SeverityPerSide" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">Severity Per Side</div>
+                                <div data-accident-category="SeverityWeather" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">Severity By Weather</div>
+                                <div data-accident-category="SeverityBySeasonandRegion" class="mr-5 py-2 px-3 badge badge-pill bg-primary text-white shadow text-uppercase">Severity By Season</div>
+                                <div data-accident-category="DurationBySeasonandSeason" class="mr-5 py-2 px-3 badge badge-pill bg-dark text-light text-uppercase">Duration By Season</div>
+                            </h5>
+                        </nav>
+                        <img class="mx-auto img-fluid p-3 m-3" id="avgImage" src="images/avgSeverityBySeasonandRegion.png" alt="Severity By Season and Region">
+                    </p>
+                </section>
+                <!-- <section id="accident-map" class="section d-flex flex-column border-bottom mb-5 pb-3">
+                    <h1 class="page-title display-4 font-weight-light mb-5">
+                        Accidents Map
+                    </h1>
+                    <p>The below map shows all accidents between March 2018 and March 2019.</p>
+                    <div id="accident-map--gmap" class="rounded shadow-sm border p-3 m-3"></div>
+                    <hr class="my-5">
+                </section> -->
+                <section id="ml-models" class="section d-flex flex-column border-bottom mb-5 pb-3">
+                    <h1 class="page-title display-4 font-weight-light  mb-5">
+                        Machine Learning Models
+                    </h1>
+                    <h5 class="text-uppercase">
+                        Data Cleanup
+                    </h5>
+                    <p>
+                        This initial model included 1.8 million records (down from ~2.25 m ). I dropped null values and columns with the least amount of information or data that will not be known at the time of the accident such as accident end time. Features that were too specific,
+                        such as the street name for 1.8M records and features that proved to have low impact on the model were also removed. Here is the full list of removed features:
+                        <small><code class="d-block p-2">
+                            "End_Lat", "End_Lng", "Number", "Wind_Chill(F)", "Precipitation(in)",
+                            "Airport_Code", "Weather_Timestamp", "ID", "Source", "Description", "TMC", "End_Time", "Distance(mi)", "Zipcode", "Country", "City", "County", "Timezone", "Civil_Twilight", "Nautical_Twilight","Astronomical_Twilight", "Street",
+                            "Start_Time", "Start_Lat", "Start_Lng", "Wind_Direction", "State", "Give_Way","Traffic_Calming", "Roundabout","Bump", "Turning_Loop"
+                        </code></small>
+                    </p>
+                    <h5 class="text-uppercase">Initial Model and Feature Selection</h5>
+                    <p>
+                        I used several models to predict Accident Severity (Y), including Random Forest, Decisions Tree, Support Vector Machine (SVM), and Logistic Regression. As a baseline test model, I ran Random Forest on most features except the ones removed during data
+                        cleanup (see above). From there, I determined features with the least impact on the model and dropped them from any subsequent models. This test run model’s train score was in the low nineties and test score in the low sixties.
+                    </p>
+                    <h5 class="text-uppercase pt-3">
+                        Random Forest Model 1
+                    </h5>
+                    <p>
+                        The best model proved to be Random Forest with the initial Training Data Score of 0.9431 and Testing Data Score of 0.6555.
+                        <h6>
+                            Feature Engineering - Weather Condition
+                        </h6>
+                        <p>
+                            Once I identified the features that were least relevant, I thought about creating new simplified features based on existing once. Features with high cardinality like “Weather Condition” were grouped into lower number of unique values. For example, Shallow
+                            Fog, Patches of Fog, Light Freezing Fog, Light Fog, Haze, Light Haze all became “Fog”. This exercise reduced the weather condition unique value counts from 55 to 20. I used GridSearchCV to determine best max depth and number
+                            of estimators, but that approach did not yield a better test score.
+                        </p>
+                    </p>
+                    <h5 class="text-uppercase pt-3">
+                        Random Forest Model 2
+                    </h5>
+                    <p>
+                        <h6>Data Cleanup</h6>
+                        <p>
+                            I did the same initial clean up as in model 1, including the new weather condition feature. Then I went further and removed any records where end time is less than start time and any accidents that were over 12 hours long. Some accidents lasted years
+                            according to the data! I added additional features explained in the feature engineering section and I also included the State.
+                        </p>
+                        <h6>Feature Engineering</h6>
+                        <p>
+                            I extracted the month, hour, and minute values from the start and end times of the accident. This information allowed me to calculate accident’s duration and create new features such as seasons and time of day. I also added categorized the states info
+                            different climatic regions such as 'Central', 'West', 'Southeast', by merging the data with another csv file on state. This model resulted in a slightly better training score of 0.9569 and testing score of 0.6838.
+                            <p>
+                                Below is a chart showing features ranked by importance in the model.
+                            </p>
+                            <img class="mx-auto img-fluid p-3 m-3" id="featureImportanceImage" src="images/Feature_Importances.png" alt="Feature Importance">
+                            <hr class="my-5">
+                        </p>
+                        <h6>Duration and Severity</h6>
+                        <p>
+                            The severity of the accident, is a number between 0 and 4, where 0 indicates the least impact on traffic (i.e., short delay as a result of the accident) and 4 indicates a significant impact on traffic (i.e., long delay). I was surprised that there was
+                            no stong correlation between the severity of an accident and its duration with a pearson correlation coefficient of 0.038772. Most accidents lasted around 30 minutes.
+                        </p>
+                    </p>
+                    <!-- <section id="virginia-accidents" class="d-none section d-flex flex-column border-bottom mb-5 pb-3">
+                        <h1 class="mt-5 page-title display-4 font-weight-light  mb-5">
+                            Virginia Accidents
+                        </h1>
+                        <p>
+                            About accidents in Virginia ...
+                        </p>
+                        <hr class="my-5">
+                    </section> -->
+                </section>
+            </main>
+        </div>
+    </section>
     <!-- The div that holds our map -->
-    <div id="map"></div>
+    <!-- <div id="map"></div> -->
     <!-- API key -->
-    <script type="text/javascript" src="static/js/config.js"></script>
+    <!-- <script type="text/javascript" src="static/js/config.js"></script> -->
     <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script> -->
     <!-- D3 JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
     <!-- Our JavaScript -->
@@ -29,9 +190,6 @@
 
     <!-- Marker Cluster JS & CSS -->
     <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-
 
 
 </body>
