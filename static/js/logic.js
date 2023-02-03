@@ -1,18 +1,64 @@
+function setAccidentCategory(category, imgId) {
+    const buttons = document.querySelectorAll(`[data-for=${imgId}] [data-accident-category]`)
+    for (const button of buttons) {
+        if (button.dataset.accidentCategory === category) {
+            button.classList.remove("bg-dark", "text-light")
+            button.classList.add("bg-primary", "text-white", "shadow")
+        } else {
+            button.classList.add("bg-dark", "text-light")
+            button.classList.remove("bg-primary", "text-white", "shadow")
+        }
+    }
+    document.getElementById(imgId + 'Image').setAttribute('src', `images/${imgId}${category}.png`)
+}
+
+function initChartToggle() {
+    document.addEventListener('click', event => {
+        if (event.target.dataset && event.target.dataset.accidentCategory) {
+            const parent = event.target.parentNode
+            setAccidentCategory(event.target.dataset.accidentCategory, parent.dataset.for)
+        }
+    })
+}
+
+initChartToggle()
+
 // Creating map object
-var myMap = L.map("map", {
-    center: [40.7, -73.95],
-    zoom: 4
-});
+//var myMap = L.map("accident-map--gmap", {
+    //center: [40.7, -73.95],
+    //zoom: 4
+//});
 
 // Adding tile layer to the map
-L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 18,
-    id: "mapbox.streets",
-    accessToken: API_KEY
-}).addTo(myMap);
+//L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    //attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    //maxZoom: 18,
+    //id: "mapbox.streets",
+    //accessToken: API_KEY
+//}).addTo(myMap);
+
+//var url = "static/data/maps.json"
+    // Grab the data with d3
+//d3.json(url, (data) => {
+    //console.log(data);
+    // Create a new marker cluster group
+    //const markers = L.markerClusterGroup();
+
+    // Loop through data
+    //data.forEach((accident) => {
+        // Check for location property
+        // Add marker
+        //const marker = L.marker([accident.Start_Lat, accident.Start_Lng])
+            //.bindPopup(`${inspection.inspection_date}: ${inspection.result}`);
+
+        //markers.addLayer(marker);
+
+    //});
 
 
+    // Add our marker cluster layer to the map
+    //myMap.addLayer(markers);
+//});
 
 
 // function createMarkers(accidents) {
@@ -45,27 +91,3 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 // d3.json("static/data/maps.json", createMarkers
 
 // );
-
-
-var url = "static/data/maps.json"
-    // Grab the data with d3
-d3.json(url, (data) => {
-    console.log(data);
-    // Create a new marker cluster group
-    const markers = L.markerClusterGroup();
-
-    // Loop through data
-    data.slice(0, 1000000).forEach((accident) => {
-        // Check for location property
-        // Add marker
-        const marker = L.marker([accident.Start_Lat, accident.Start_Lng])
-            //.bindPopup(`${inspection.inspection_date}: ${inspection.result}`);
-
-        markers.addLayer(marker);
-
-    });
-
-
-    // Add our marker cluster layer to the map
-    myMap.addLayer(markers);
-});
