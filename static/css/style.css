@@ -1,25 +1,79 @@
-    body {
-        padding: 0;
-        margin: 0;
-    }
-    
-    #map,
-    body,
-    html {
-        height: 100%;
-    }
-    
-    .legend-item {
-        display: flex;
-        align-items: center;
-    }
-    
-    .legend {
-        background-color: #FFF8E1;
-        padding: 10px;
-        border-radius: 5px;
-    }
-    
-    .legend-text {
-        margin-left: 5px;
-    }
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700&display=swap');
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+#accident-map--gmap {
+    min-height: 80vh;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend {
+    background-color: #FFF8E1;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.legend-text {
+    margin-left: 5px;
+}
+
+:root {
+    font-size: 16px;
+}
+
+html,
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important
+}
+
+html {
+    height: 100vh;
+    padding-top: 61px;
+    overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+.display-4,
+.display-3,
+.display-2,
+.display-1,
+a[href] {
+    font-family: "Fira Mono", 'Courier New', Courier, monospace
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+[data-for] .badge:not(.bg-primary) {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+[data-for] .badge.bg-primary {
+    transform: scale(1.2);
+}
+
+[data-for] .badge.bg-dark:hover {
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25);
+    background-color: hsl(210, 10%, 17%) !important;
+}
+
+img {
+    max-width: 900px !important;
+}
